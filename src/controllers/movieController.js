@@ -10,7 +10,19 @@ const controller = {
       next(error);
     }
   },
-
+  getOneById: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const movie = await Movie.findById(id);
+      if (!movie) {
+        res.status(400).json({ message: "Movie Not Found" });
+      }
+      console.log("movie called");
+      return res.status(200).json(movie);
+    } catch (error) {
+      next(error);
+    }
+  },
   getAll: async (req, res, next) => {
     try {
       const movies = await Movie.find();
@@ -20,10 +32,20 @@ const controller = {
       next(error);
     }
   },
-  deleteOne: async (req, res, next) => {
-    const { title } = req.body;
+
+  updateMovie: async (req, res, next) => {
     try {
-      await Movie.findOneAndDelete({ title: title });
+      const { id } = req.params;
+      const updateMovie = await Movie.findByIdAndUpdate(id, req.body);
+      res.status(200).json(updateMovie);
+    } catch (error) {
+      next.error;
+    }
+  },
+  deleteOne: async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      await Movie.findByIdAndDelete(id);
       res.status(200).json({ message: "Deleted" });
     } catch (error) {
       console.log("failed to delete entity", error);
