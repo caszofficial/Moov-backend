@@ -16,5 +16,3 @@ app.use("/movies", movieRouter);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
-
-// mongodb+srv://santiagozapata07:santiagof1@cluster0.zjjglps.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
