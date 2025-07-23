@@ -9,6 +9,7 @@ const movieSchema = new mongoose.Schema(
     description: String,
     producedBy: String,
     boxOfficeRevenue: Number,
+    imageUrl: String,
   },
   {
     versionKey: false,
